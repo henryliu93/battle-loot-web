@@ -22,11 +22,10 @@ a:hover {
 .btn-default:hover,
 .btn-default:focus {
   color: #333;
-  text-shadow: none; /* Prevent inheritance from `body` */
+  text-shadow: none; 
   background-color: #fff;
   border: 1px solid #fff;
 }
-
 
 /*
  * Base structure
@@ -58,39 +57,15 @@ body {
 
 /* Padding for spacing */
 .inner {
-  padding: 30px;
+  padding: 10px;
 }
 
 
-/*
- * Header
- */
-.masthead-brand {
-  margin-top: 10px;
-  margin-bottom: 10px;
+.central-panel{
+  padding: 10px;
+  height: auto;
 }
 
-.masthead-nav > li {
-  display: inline-block;
-}
-.masthead-nav > li + li {
-  margin-left: 20px;
-}
-.masthead-nav > li > a {
-  padding-right: 0;
-  padding-left: 0;
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff; /* IE8 proofing */
-  color: rgba(255, 255, 255, .75);
-  border-bottom: 2px solid transparent;
-}
-.masthead-nav > li > a:hover,
-.masthead-nav > li > a:focus {
-  background-color: transparent;
-  border-bottom-color: #a9a9a9;
-  border-bottom-color: rgba(255, 255, 255, .25);
-}
 .masthead-nav > .active > a,
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
@@ -118,6 +93,11 @@ body {
 .cover .btn-lg {
   padding: 10px 20px;
   font-weight: 700;
+}
+
+.cover .row {
+  height: 100%;
+  background-color: #999;
 }
 
 
