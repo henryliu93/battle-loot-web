@@ -17,7 +17,7 @@ a:hover {
   color: #fff;
 }
 
-/* Custom default button */
+/* default button style*/
 .btn-default,
 .btn-default:hover,
 .btn-default:focus {
@@ -30,7 +30,6 @@ a:hover {
 /*
  * Base structure
  */
-
 html,
 body {
   height: 100%;
@@ -60,12 +59,6 @@ body {
   padding: 10px;
 }
 
-
-.central-panel{
-  padding: 10px;
-  height: auto;
-}
-
 .masthead-nav > .active > a,
 .masthead-nav > .active > a:hover,
 .masthead-nav > .active > a:focus {
@@ -86,35 +79,49 @@ body {
 /*
  * Cover
  */
-
 .cover {
-  padding: 0 20px;
-}
-.cover .btn-lg {
-  padding: 10px 20px;
-  font-weight: 700;
+  padding: 13px 25px;
+  background-color: #999;
 }
 
 .cover .row {
   height: 100%;
-  background-color: #999;
+  background-color: rgb(70, 64, 64);
+  padding: 10px 20px;
 }
 
+.token-input-form {
+  width: 50%;
+}
+
+.message-panel {
+  background-color: antiquewhite;
+  text-align: center;
+  padding-top: 3%;
+  vertical-align: bottom;
+}
+
+.stake-row {
+  background-color: coral!important;
+}
+
+.central-panel {
+  background-color: burlywood;
+  width: 100%;
+  height: 100%;
+}
 
 /*
- * Footer
+ * Footer stytle
  */
-
 .mastfoot {
   color: #999; /* IE8 proofing */
   color: rgba(255, 255, 255, .5);
 }
 
-
 /*
  * Affix and center
  */
-
 @media (min-width: 768px) {
   /* Pull out the header and footer */
   .masthead {
