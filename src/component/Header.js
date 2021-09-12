@@ -10,7 +10,7 @@ class Header extends React.Component {
       return (
         <div className="masthead clearfix container">
             <div className="inner row">
-              <div className="col-md-4">
+              <div className="col-4">
                 <h3 className="masthead-brand">Battle Loot</h3>
               </div>
               <Account />
@@ -38,16 +38,16 @@ class Header extends React.Component {
       const connectWallet = this.props.connectWallet;
       if(address){
         return (
-          <div className="col-md-8 row">
-            <div className="col-md-12">{address}</div>
+          <div className="col-8 row">
+            <div className="col-12">{address}</div>
           </div>
         );
       }
       
       return (
-        <div className="col-md-8 row">
-            <div className="col-md-8">Connect your Wallet</div>
-            <div className="col-md-4">
+        <div className="col-8 row">
+            <div className="col-8">Connect your Wallet</div>
+            <div className="col-4">
             <button className="btn btn-default" onClick={() => {connectWallet()}}>
               Connect
             </button>

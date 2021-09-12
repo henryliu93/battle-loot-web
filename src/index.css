@@ -94,6 +94,16 @@ body {
   width: 50%;
 }
 
+#tokenInput{
+  width: 40%;
+}
+
+#button-addon{
+  background-color: rgb(228, 227, 225);
+  color: rgb(75, 73, 73);
+  width: 35%;
+}
+
 .message-panel {
   background-color: antiquewhite;
   text-align: center;
