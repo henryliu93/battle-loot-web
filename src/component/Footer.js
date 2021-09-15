@@ -8,7 +8,7 @@ class Footer extends React.Component {
       return (
         <div className="mastfoot">
             <div className="inner">
-              <p>Power By <a className="https://getbootstrap.com/">Battle Loot</a>, by <a href="https://twitter.com/mdo">@battle loot</a>.</p>
+              <p>Join us at <a href="https://discord.com/channels/884667979655163945/884741176522063882">Discord</a> or Follow us at <a href="https://twitter.com/BattleforLoot">@Twitter</a>.</p>
             </div>
         </div>
       );

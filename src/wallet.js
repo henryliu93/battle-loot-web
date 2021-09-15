@@ -1,6 +1,6 @@
 import Web3 from 'web3';
 
-const eth_net_param = {
+export const eth_net_param = {
     chainId: '0x1',
     chainName: 'Ethereum MainNet',
     nativeCurrency: {
@@ -12,8 +12,31 @@ const eth_net_param = {
     blockExplorerUrls: ['https://etherscan.io']
 }
 
+export const goerli_net_param = {
+  chainId: '0x5',
+  chainName: 'Goerli TestNet',
+  nativeCurrency: {
+    name: 'Eth',
+    symbol: 'Eth',
+    decimals: 18,
+  },
+  rpcUrls: ['https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
+  blockExplorerUrls: ['https://goerli.etherscan.io']
+}
 
-const polygon_net_param = {
+export const mumbai_net_param = {
+  chainId: '0x13881',
+  chainName: 'Mumbai TestNet',
+  nativeCurrency: {
+    name: 'Matic',
+    symbol: 'Matic',
+    decimals: 18,
+  },
+  rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
+  blockExplorerUrls: ['https://mumbai.polygonscan.com/']
+}
+
+export const polygon_net_param = {
     chainId: '0x89',
     chainName: 'Polygon MainNet',
     nativeCurrency: {
@@ -63,7 +86,7 @@ async function switchNetWork(net_param, callback){
       }
 }
 
-class wallet {
+export class wallet {
     
     //Created check function to see if the MetaMask extension is installed
     static isMetaMaskInstalled(){
@@ -74,15 +97,23 @@ class wallet {
 
     static getConnectedAccount(e) {
         getAccount().then(e)
-    }
+    };
 
     static switchToEthMainNet(callback){
         switchNetWork(eth_net_param, callback);
-    }
+    };
 
     static switchToPolygonMainNet(callback){
         switchNetWork(polygon_net_param, callback);
-    }
+    };
+
+    static switchToMumbaiNet(callback){
+      switchNetWork(mumbai_net_param, callback);
+    };
+
+    static switchToGoerliNet(callback){
+      switchNetWork(goerli_net_param, callback);
+    };
 }
 
 export default wallet;

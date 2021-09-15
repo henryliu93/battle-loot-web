@@ -115,6 +115,10 @@ body {
   background-color: coral!important;
 }
 
+.claim-row {
+  background-color: rgb(74, 226, 226)!important;
+}
+
 .central-panel {
   background-color: burlywood;
   width: 100%;

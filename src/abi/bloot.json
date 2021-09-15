@@ -5,13 +5,18 @@
             "inputs":[
                 {
                     "internalType":"address",
-                    "name":"_mmlootaddress",
+                    "name":"_pmlootaddress",
                     "type":"address"
                 },
                 {
                     "internalType":"address",
                     "name":"rewardTokenAddress",
                     "type":"address"
+                },
+                {
+                    "internalType":"uint256",
+                    "name":"_rewardAmountPerRound",
+                    "type":"uint256"
                 }
             ],
             "stateMutability":"nonpayable",
@@ -301,25 +306,6 @@
         },
         {
             "inputs":[
-                {
-                    "internalType":"uint256",
-                    "name":"",
-                    "type":"uint256"
-                }
-            ],
-            "name":"candidateWarriors",
-            "outputs":[
-                {
-                    "internalType":"address",
-                    "name":"warriorAddress",
-                    "type":"address"
-                }
-            ],
-            "stateMutability":"view",
-            "type":"function"
-        },
-        {
-            "inputs":[
     
             ],
             "name":"claim",
@@ -327,6 +313,45 @@
     
             ],
             "stateMutability":"nonpayable",
+            "type":"function"
+        },
+        {
+            "inputs":[
+                {
+                    "internalType":"address",
+                    "name":"warriorAddress",
+                    "type":"address"
+                }
+            ],
+            "name":"getCandidateWarriors",
+            "outputs":[
+                {
+                    "internalType":"uint256",
+                    "name":"warriorId",
+                    "type":"uint256"
+                },
+                {
+                    "internalType":"address",
+                    "name":"_warriorAddress",
+                    "type":"address"
+                },
+                {
+                    "internalType":"uint256[]",
+                    "name":"_originalTokenIds",
+                    "type":"uint256[]"
+                },
+                {
+                    "internalType":"uint256[]",
+                    "name":"_rarityRankings",
+                    "type":"uint256[]"
+                },
+                {
+                    "internalType":"uint256[]",
+                    "name":"_rarityIndexes",
+                    "type":"uint256[]"
+                }
+            ],
+            "stateMutability":"view",
             "type":"function"
         },
         {
@@ -352,12 +377,12 @@
             "inputs":[
     
             ],
-            "name":"getPlayerStakedToken",
+            "name":"getYourStakedToken",
             "outputs":[
                 {
-                    "internalType":"uint256[]",
+                    "internalType":"string",
                     "name":"",
-                    "type":"uint256[]"
+                    "type":"string"
                 }
             ],
             "stateMutability":"view",
@@ -365,14 +390,18 @@
         },
         {
             "inputs":[
-    
+                {
+                    "internalType":"address",
+                    "name":"account",
+                    "type":"address"
+                }
             ],
-            "name":"mmloot",
+            "name":"getYourStakedToken",
             "outputs":[
                 {
-                    "internalType":"contract LootProject",
+                    "internalType":"string",
                     "name":"",
-                    "type":"address"
+                    "type":"string"
                 }
             ],
             "stateMutability":"view",
@@ -395,6 +424,21 @@
         },
         {
             "inputs":[
+    
+            ],
+            "name":"pmloot",
+            "outputs":[
+                {
+                    "internalType":"contract LootProject",
+                    "name":"",
+                    "type":"address"
+                }
+            ],
+            "stateMutability":"view",
+            "type":"function"
+        },
+        {
+            "inputs":[
                 {
                     "internalType":"uint256",
                     "name":"tokenId",
@@ -403,7 +447,11 @@
             ],
             "name":"pvpBattleByRanking",
             "outputs":[
-    
+                {
+                    "internalType":"bool",
+                    "name":"result",
+                    "type":"bool"
+                }
             ],
             "stateMutability":"nonpayable",
             "type":"function"
@@ -418,7 +466,11 @@
             ],
             "name":"pvpBattleByRarityIndex",
             "outputs":[
-    
+                {
+                    "internalType":"bool",
+                    "name":"result",
+                    "type":"bool"
+                }
             ],
             "stateMutability":"nonpayable",
             "type":"function"
@@ -432,21 +484,6 @@
                 }
             ],
             "name":"quitFromGame",
-            "outputs":[
-    
-            ],
-            "stateMutability":"nonpayable",
-            "type":"function"
-        },
-        {
-            "inputs":[
-                {
-                    "internalType":"address",
-                    "name":"receiver",
-                    "type":"address"
-                }
-            ],
-            "name":"refundRewardToken",
             "outputs":[
     
             ],
@@ -472,6 +509,21 @@
                 }
             ],
             "name":"registerRole",
+            "outputs":[
+    
+            ],
+            "stateMutability":"nonpayable",
+            "type":"function"
+        },
+        {
+            "inputs":[
+                {
+                    "internalType":"address",
+                    "name":"receiver",
+                    "type":"address"
+                }
+            ],
+            "name":"removeRewardToken",
             "outputs":[
     
             ],
@@ -553,21 +605,6 @@
             "inputs":[
                 {
                     "internalType":"address",
-                    "name":"newMMLoot",
-                    "type":"address"
-                }
-            ],
-            "name":"updateMMLoot",
-            "outputs":[
-    
-            ],
-            "stateMutability":"nonpayable",
-            "type":"function"
-        },
-        {
-            "inputs":[
-                {
-                    "internalType":"address",
                     "name":"newRewardToken",
                     "type":"address"
                 }
@@ -583,19 +620,15 @@
             "inputs":[
                 {
                     "internalType":"address",
-                    "name":"",
+                    "name":"newpmloot",
                     "type":"address"
                 }
             ],
-            "name":"warriorsIndex",
+            "name":"updatepmloot",
             "outputs":[
-                {
-                    "internalType":"uint256",
-                    "name":"",
-                    "type":"uint256"
-                }
+    
             ],
-            "stateMutability":"view",
+            "stateMutability":"nonpayable",
             "type":"function"
         }
     ],
@@ -603,8 +636,8 @@
       "80001": {
         "events": {},
         "links": {},
-        "address": "0xc9468Cff9A0749D3B661AdB5503Ee385B3e0D666",
-        "transactionHash": "0x80f8b0b1f7fc55744362e76baf9d0d17ad495cfdec2b23b808ec8b90be7ef7e8"
+        "address": "0x005d8f25c238c7093056788Ed3302e709736120D",
+        "transactionHash": "0xbbac31edc7d81c6da9216496a2d05a7ccff966492fb6be6739f42c2e8a62849b"
       }
     }
 
