@@ -1,58 +1,5 @@
 import Web3 from 'web3';
-
-export const eth_net_param = {
-    chainId: '0x1',
-    chainName: 'Ethereum MainNet',
-    nativeCurrency: {
-        name: 'Eth',
-        symbol: 'Eth',
-        decimals: 18,
-    },
-    rpcUrls: ['https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
-    blockExplorerUrls: ['https://etherscan.io']
-}
-
-export const goerli_net_param = {
-  chainId: '0x5',
-  chainName: 'Goerli TestNet',
-  nativeCurrency: {
-    name: 'Eth',
-    symbol: 'Eth',
-    decimals: 18,
-  },
-  rpcUrls: ['https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
-  blockExplorerUrls: ['https://goerli.etherscan.io']
-}
-
-export const mumbai_net_param = {
-  chainId: '0x13881',
-  chainName: 'Mumbai TestNet',
-  nativeCurrency: {
-    name: 'Matic',
-    symbol: 'Matic',
-    decimals: 18,
-  },
-  rpcUrls: ['https://rpc-mumbai.maticvigil.com/'],
-  blockExplorerUrls: ['https://mumbai.polygonscan.com/']
-}
-
-export const polygon_net_param = {
-    chainId: '0x89',
-    chainName: 'Polygon MainNet',
-    nativeCurrency: {
-        name: 'Matic',
-        symbol: 'Matic',
-        decimals: 18,
-    },
-    rpcUrls: [
-        'https://rpc-mainnet.matic.network',
-        'https://matic-mainnet.chainstacklabs.com',
-        'https://rpc-mainnet.maticvigil.com',
-        'https://rpc-mainnet.matic.quiknode.pro',
-        'https://matic-mainnet-full-rpc.bwarelabs.com'
-    ],
-    blockExplorerUrls: ['https://polygonscan.com/']
-}
+import config from './config.js'
 
 async function getAccount(){
     const web3 = new Web3(window.ethereum);
@@ -100,19 +47,19 @@ export class wallet {
     };
 
     static switchToEthMainNet(callback){
-        switchNetWork(eth_net_param, callback);
+        switchNetWork(config.net_config.eth_net_param, callback);
     };
 
     static switchToPolygonMainNet(callback){
-        switchNetWork(polygon_net_param, callback);
+        switchNetWork(config.net_config.polygon_net_param, callback);
     };
 
     static switchToMumbaiNet(callback){
-      switchNetWork(mumbai_net_param, callback);
+      switchNetWork(config.net_config.mumbai_net_param, callback);
     };
 
     static switchToGoerliNet(callback){
-      switchNetWork(goerli_net_param, callback);
+      switchNetWork(config.net_config.goerli_net_param, callback);
     };
 }
 

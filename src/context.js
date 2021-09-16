@@ -1,5 +1,6 @@
 import React from "react"
-import {wallet, mumbai_net_param} from "./wallet";
+import {wallet} from "./wallet";
+import config from "./config.js"
 import {getWeb3, getContract, getNftContract} from "./contract.js"
 import {getTopLootMap} from "./loot.js"
 import Web3 from "web3";
@@ -10,13 +11,15 @@ const lootMap = getTopLootMap();
 const createAccountStore = () => {
     let state = {
         address: null,
-        chainId: window.ethereum ? window.ethereum.chainId : -1,
+        chainId: window.ethereum.chainId || '0x0',
         web3: null,
         maticProvider: null,
         maticPosClient: null,
         bagld_to_claim: 0,
         bagld_own: 0,
         totalWarriors: 0,
+        battleInfo: null,
+        stakeTokens: null,
     };
     let getState = () => state;
     let listeners = [];
@@ -51,14 +54,13 @@ const createAccountStore = () => {
                             .then(ownAddress => {
                                 if(ownAddress === state.address){
                                     getContract(state.web3).then(contract => {
-                                        //contract.methods.warriorsIndex(state.address).send({from: state.address}).then(e => console.log(e));
                                         contract.methods.registerRole(tokenId, rarityRank, rarityIndex)
                                          .send({from: state.address})
                                          .then(e => console.log(e));
                                     });
                                 }else{
                                     getNftContract(state.web3).then(nftContract => {
-                                        nftContract.methods.approve('0x005d8f25c238c7093056788Ed3302e709736120D', tokenId).send({from: state.address})
+                                        nftContract.methods.approve(config.contract_config.bloot_contract_address, tokenId).send({from: state.address})
                                         .then(ts => {
                                             getContract(state.web3).then(contract => {
                                                 //contract.methods.warriorsIndex(state.address).send({from: state.address}).then(e => console.log(e));
@@ -71,7 +73,6 @@ const createAccountStore = () => {
                                 }
                             });
                     })
-
                     
                 });
                 
@@ -103,8 +104,37 @@ const createAccountStore = () => {
         wallet.switchToMumbaiNet(() => {
             const tokenId = document.getElementById("battleInput").value;
             getContract(state.web3).then(contract => {
-                //contract.methods.warriorsIndex(state.address).send({from: state.address}).then(e => console.log(e));
                 contract.methods.pvpBattleByRanking(tokenId)
+                 .send({from: state.address})
+                 .then(e => {
+                     contract.methods.battleDetailsByRanking(state.address)
+                     .call({from: state.address})
+                     .then(bt => {
+                        state.battleInfo = bt;
+                        listeners.forEach(listener => listener());
+                     });
+                 });
+            });
+        });
+    }
+
+    let claimReward = () => {
+        if(state.bagld_to_claim > 0){
+            wallet.switchToMumbaiNet(() => {
+                getContract(state.web3).then(contract => {
+                    contract.methods.claim()
+                     .send({from: state.address})
+                     .then(e => console.log(e));
+                });
+            });
+        } 
+    }
+
+    let withdraw = () => {
+        wallet.switchToMumbaiNet(() => {
+            const tokenId = document.getElementById("withdrawInput").value;
+            getContract(state.web3).then(contract => {
+                contract.methods.quitFromGame(tokenId)
                  .send({from: state.address})
                  .then(e => console.log(e));
             });
@@ -113,26 +143,32 @@ const createAccountStore = () => {
 
     // timer
     setInterval(() => {
-        if(mumbai_net_param.chainId === state.chainId && state.address){
+        if(config.net_config.mumbai_net_param.chainId === state.chainId && state.address){
             getContract(state.web3).then(contract => {
                 contract.methods.totalWarriors()
                         .call()
                         .then(num => {
-                            console.log("totalWarriors :" + num);
                             state.totalWarriors = num;
+                            listeners.forEach(listener => listener());
                         });
                 contract.methods.getClaimableReward(state.address)
                         .call({from: state.address})
                         .then(rw => {
-                            console.log("getClaimableReward :" + rw);
                             state.bagld_to_claim = rw;
+                            listeners.forEach(listener => listener());
+                        });
+                contract.methods.getYourStakedToken(state.address)
+                        .call({from: state.address})
+                        .then(rs => {
+                            console.log(rs);
+                            state.stakeTokens = rs;
+                            listeners.forEach(listener => listener());
                         });
             });
         }
     },10000);
     
-
-    return {subscribe, getState, connect, connectWallet, stake, deposit, battle}
+    return {subscribe, getState, connect, connectWallet, stake, deposit, battle, claimReward, withdraw}
 }
 
 export const accountStore = createAccountStore();

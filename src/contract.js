@@ -22,7 +22,6 @@ export const getContract = async (web3) => {
     const data = require("./abi/bloot.json");
     const netId = await web3.eth.net.getId();
     const deployedNetwork = data.networks[netId];
-    console.log(deployedNetwork.address);
     const bloot = new web3.eth.Contract(
       data.abi,
       deployedNetwork.address
@@ -34,7 +33,6 @@ export const getNftContract = async (web3) => {
   const data = require("./abi/nft.json");
     const netId = await web3.eth.net.getId();
     const deployedNetwork = data.networks[netId];
-    console.log(deployedNetwork.address);
     const nft = new web3.eth.Contract(
       data.abi,
       deployedNetwork.address

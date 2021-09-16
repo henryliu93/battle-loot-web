@@ -327,27 +327,22 @@
             "outputs":[
                 {
                     "internalType":"uint256",
-                    "name":"warriorId",
+                    "name":"",
                     "type":"uint256"
                 },
                 {
-                    "internalType":"address",
-                    "name":"_warriorAddress",
-                    "type":"address"
-                },
-                {
                     "internalType":"uint256[]",
-                    "name":"_originalTokenIds",
+                    "name":"",
                     "type":"uint256[]"
                 },
                 {
                     "internalType":"uint256[]",
-                    "name":"_rarityRankings",
+                    "name":"",
                     "type":"uint256[]"
                 },
                 {
                     "internalType":"uint256[]",
-                    "name":"_rarityIndexes",
+                    "name":"",
                     "type":"uint256[]"
                 }
             ],
@@ -366,7 +361,7 @@
             "outputs":[
                 {
                     "internalType":"uint256",
-                    "name":"rewardAmount",
+                    "name":"",
                     "type":"uint256"
                 }
             ],
@@ -380,9 +375,9 @@
             "name":"getYourStakedToken",
             "outputs":[
                 {
-                    "internalType":"string",
+                    "internalType":"uint256[]",
                     "name":"",
-                    "type":"string"
+                    "type":"uint256[]"
                 }
             ],
             "stateMutability":"view",
@@ -399,9 +394,9 @@
             "name":"getYourStakedToken",
             "outputs":[
                 {
-                    "internalType":"string",
+                    "internalType":"uint256[]",
                     "name":"",
-                    "type":"string"
+                    "type":"uint256[]"
                 }
             ],
             "stateMutability":"view",
@@ -636,8 +631,8 @@
       "80001": {
         "events": {},
         "links": {},
-        "address": "0x005d8f25c238c7093056788Ed3302e709736120D",
-        "transactionHash": "0xbbac31edc7d81c6da9216496a2d05a7ccff966492fb6be6739f42c2e8a62849b"
+        "address": "0x48CEDc686E9a368256Ee4344880556a5312Fdc24",
+        "transactionHash": "0xf18016df846c841a7f59487bb63617a9b5d3a188602cfa98912e1641ca7ad302"
       }
     }
 
