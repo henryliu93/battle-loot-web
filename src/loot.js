@@ -12,10 +12,9 @@ export const getLootMapFromUrl = (tokenId) => {
     console.log(url);
     return fetch(url, {
         method: 'GET',
-        mode: "no-cors",
+        mode: "cors",
         headers:{
-            'Accept': 'application/json',
-            'Access-Control-Allow-Origin': '*',
+            'Accept': 'application/json'
         }
     });
 }
