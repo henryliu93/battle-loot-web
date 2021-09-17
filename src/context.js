@@ -13,11 +13,12 @@ const getLootRarityInfo =  async (tokenId) => {
         if (lootInfo){
             return lootInfo;
         }
-        const data = await (await getLootMapFromUrl(tokenId)).json;
+        const data = await (await getLootMapFromUrl(tokenId)).data;
         console.log(data);
         data.forEach(e => {
             lootMap.set(e.lootId, e);
         });
+        console.log(lootMap);
         return lootMap.get(tokenId);
     }
     

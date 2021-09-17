@@ -1,4 +1,5 @@
 import config from "./config.js";
+import axios from 'axios';
 export const getLootMapFromUrl = (tokenId) => {
     let key = 21081;
     if(tokenId > 21081){
@@ -10,11 +11,5 @@ export const getLootMapFromUrl = (tokenId) => {
     }
     const url = config.loot_url_prefix + (key + '.json');
     console.log(url);
-    return fetch(url, {
-        method: 'GET',
-        mode: "no-cors",
-        headers:{
-            'Accept': 'application/json'
-        }
-    });
+    return axios.get(url);
 }
