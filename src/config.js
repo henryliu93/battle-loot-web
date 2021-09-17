@@ -62,7 +62,8 @@ const config = {
     contract_config: {
         bloot_contract_address: '0x48CEDc686E9a368256Ee4344880556a5312Fdc24',
         mloot_contract_address: '0x50faeABdc3de25bDeAe18B30f0Fe82e4Bfd6B1ed',
-    }
+    },
+    loot_url_prefix: 'https://loot-bk.oss-ap-southeast-1.aliyuncs.com/loot/'
 }
 
 export default config;

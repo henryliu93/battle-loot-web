@@ -1,12 +1,27 @@
 import React from "react"
 import {wallet} from "./wallet";
 import config from "./config.js"
-import {getWeb3, getContract, getNftContract} from "./contract.js"
-import {getTopLootMap} from "./loot.js"
+import {getContract, getNftContract} from "./contract.js"
+import {getLootMapFromUrl} from "./loot.js"
 import Web3 from "web3";
 import { MaticPOSClient} from "@maticnetwork/maticjs"
 
-const lootMap = getTopLootMap();
+const lootMap = new Map();
+const getLootRarityInfo =  async (tokenId) => {
+    if(tokenId >= 8001 && tokenId <= 1329081){
+        let lootInfo = lootMap.get(tokenId);
+        if (lootInfo){
+            return lootInfo;
+        }
+        const data = await (await getLootMapFromUrl(tokenId)).json;
+        console.log(data);
+        data.forEach(e => {
+            lootMap.set(e.lootId, e);
+        });
+        return lootMap.get(tokenId);
+    }
+    
+}
 
 const createAccountStore = () => {
     let state = {
@@ -42,41 +57,41 @@ const createAccountStore = () => {
     let stake = () => {
         if(state.web3){
             const tokenId = document.getElementById("tokenInput").value;
-            const loot = lootMap.get(Number(tokenId));
-            console.log(loot);
-            if (loot){
-                const rarityRank = loot.rarest;
-                const rarityIndex = Math.trunc(loot.score * 1000000);
-                wallet.switchToMumbaiNet(() => {
-                    getNftContract(state.web3).then(nftContract => {
-                        nftContract.methods.getApproved(tokenId)
-                            .call()
-                            .then(ownAddress => {
-                                if(ownAddress === state.address){
-                                    getContract(state.web3).then(contract => {
-                                        contract.methods.registerRole(tokenId, rarityRank, rarityIndex)
-                                         .send({from: state.address})
-                                         .then(e => console.log(e));
-                                    });
-                                }else{
-                                    getNftContract(state.web3).then(nftContract => {
-                                        nftContract.methods.approve(config.contract_config.bloot_contract_address, tokenId).send({from: state.address})
-                                        .then(ts => {
-                                            getContract(state.web3).then(contract => {
-                                                //contract.methods.warriorsIndex(state.address).send({from: state.address}).then(e => console.log(e));
-                                                contract.methods.registerRole(tokenId, rarityRank, rarityIndex)
-                                                 .send({from: state.address})
-                                                 .then(e => console.log(e));
+            getLootRarityInfo(Number(tokenId)).then(loot => {
+                if (loot){
+                    const rarityRank = loot.rarest;
+                    const rarityIndex = Math.trunc(loot.score * 1000000);
+                    wallet.switchToMumbaiNet(() => {
+                        getNftContract(state.web3).then(nftContract => {
+                            nftContract.methods.getApproved(tokenId)
+                                .call()
+                                .then(ownAddress => {
+                                    if(ownAddress === state.address){
+                                        getContract(state.web3).then(contract => {
+                                            contract.methods.registerRole(tokenId, rarityRank, rarityIndex)
+                                             .send({from: state.address})
+                                             .then(e => console.log(e));
+                                        });
+                                    }else{
+                                        getNftContract(state.web3).then(nftContract => {
+                                            nftContract.methods.approve(config.contract_config.bloot_contract_address, tokenId).send({from: state.address})
+                                            .then(ts => {
+                                                getContract(state.web3).then(contract => {
+                                                    contract.methods.registerRole(tokenId, rarityRank, rarityIndex)
+                                                     .send({from: state.address})
+                                                     .then(e => console.log(e));
+                                                });
                                             });
                                         });
-                                    });
-                                }
-                            });
-                    })
+                                    }
+                                });
+                        })
+                        
+                    });
                     
-                });
-                
-            }
+                }
+            });
+            
         }
         
     }
@@ -160,7 +175,6 @@ const createAccountStore = () => {
                 contract.methods.getYourStakedToken(state.address)
                         .call({from: state.address})
                         .then(rs => {
-                            console.log(rs);
                             state.stakeTokens = rs;
                             listeners.forEach(listener => listener());
                         });
