@@ -23,7 +23,7 @@ class Board extends React.Component {
                   <input type="text" className="form-control" placeholder="tokenId" id="erc721TokenInput"/>
                 </div>
                 <div className="col">
-                  <button type="submit" className="btn btn-primary" onClick={context.accountStore.deposit}>Deposit</button>
+                  <button type="submit" className="btn btn-primary" onClick={context.accountStore.deposit}>Stake</button>
                 </div>
               </div>
               <div className="row token-row">
@@ -33,7 +33,7 @@ class Board extends React.Component {
                         <button type="submit" className="btn btn-outline-secondary" id="button-addon" onClick={context.accountStore.stake} >Register</button>
                     </div>
                   </div>
-                <div className="col-6 message-panel">Your StakeToken : {context.accountStore.getState().stakeTokens}</div>
+                <div className="col-6 message-panel">Your Roles : {context.accountStore.getState().stakeTokens.join(',')}</div>
               </div>
               <div className="row stake-row">
                 <div className="col-3">
