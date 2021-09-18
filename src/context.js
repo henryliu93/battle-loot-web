@@ -35,7 +35,7 @@ const createAccountStore = () => {
         bagld_own: 0,
         totalWarriors: 0,
         battleInfo: null,
-        stakeTokens: null,
+        stakeTokens: [],
     };
     let getState = () => state;
     let listeners = [];
