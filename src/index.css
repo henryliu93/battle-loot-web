@@ -94,6 +94,10 @@ body {
   width: 50%;
 }
 
+#etheteum-card{
+  width: 8rem;
+}
+
 #tokenInput{
   width: 40%;
 }
@@ -105,10 +109,18 @@ body {
 }
 
 .message-panel {
-  background-color: antiquewhite;
+  background-color: rgb(250, 193, 118);
   text-align: center;
   padding-top: 3%;
   vertical-align: bottom;
+}
+
+.info-row {
+  background-color: rgb(158, 158, 247)!important;
+}
+
+.gap-row {
+  background-color: #999!important;
 }
 
 .stake-row {
